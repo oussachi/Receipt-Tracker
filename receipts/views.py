@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout, get_user
 from .forms import CreateUserForm
+from .models import Receipt, User
 
 # Create your views here.
 
@@ -44,3 +45,11 @@ def registerView(request):
 def logoutView(request):
     logout(request)
     return redirect('login')
+
+# ------------------------ Receipt views -------------------------- #
+
+def getReceipts(request):
+    username = get_user(request)
+    receipts = Receipt.objects.filter(owner=username)
+    context = {'receipts' : receipts}
+    return render(request, 'all_receipts.html', context)

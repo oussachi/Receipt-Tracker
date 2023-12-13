@@ -1,0 +1,16 @@
+<h3>My receipts</h3>
+
+{% for receipt in receipts %}
+<div>
+    Store : {{ receipt.store_name }}
+    <br>
+    Date : {{ receipt.date_of_purchase }}
+    <br>
+    Items : {{ receipt.item_list }}
+    <br>
+    Total : {{ receipt.total_amount }}
+    <br>
+    <hr>
+</div>
+<br>
+{% endfor %}
