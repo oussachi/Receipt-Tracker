@@ -53,3 +53,9 @@ def getReceipts(request):
     receipts = Receipt.objects.filter(owner=username)
     context = {'receipts' : receipts}
     return render(request, 'all_receipts.html', context)
+
+def getReceipt(request, id):
+    username = get_user(request)
+    receipt = Receipt.objects.filter(owner=username, pk=id).first()
+    context = {'receipt': receipt}
+    return render(request, 'receipt.html', context)

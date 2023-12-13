@@ -1,0 +1,21 @@
+<h3>Receipt</h3>
+
+{% if receipt != None %}
+    <div>
+        <hr>
+        Store : {{ receipt.store_name }}
+        <br>
+        Date : {{ receipt.date_of_purchase }}
+        <br>
+        Items : {{ receipt.item_list }}
+        <br>
+        Total : {{ receipt.total_amount }}
+        <br>
+        <hr>
+        <button><a href="">Modify</a></button>
+        <br>
+        <button><a href="">Delete</a></button>
+    </div>
+{% else %}
+    <h3>No receipt found</h3>
+{% endif %}
