@@ -1,0 +1,8 @@
+{% if user.username != '' %}
+<div>
+    <h4>Hello {{ user.username }}</h4>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+{% else %}
+    <h4>Hello World</h4>
+{% endif %}

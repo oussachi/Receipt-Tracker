@@ -1,20 +1,34 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout, get_user
 from .forms import CreateUserForm
 
 # Create your views here.
 
 def say_hello(request):
-    return HttpResponse('hello world')
+    context = {'user' : get_user(request)}
+    return render(request, 'home.html', context)
 
 
 # ----------------------- User views -------------------------- #
 
-def login(request):
-    return render(request, 'login.html')
+def loginView(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
 
-def register(request):
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        
+        else:
+            return redirect('login')
+    context = {}
+    return render(request, 'login.html', context)
+
+
+def registerView(request):
     form = CreateUserForm()
 
     if request.method == 'POST':
@@ -22,8 +36,11 @@ def register(request):
         if form.is_valid():
             form.save()
 
+            return redirect('login')
+
     context = {'form' : form}
     return render(request, 'register.html', context)
 
-def logout(request):
-    return
+def logoutView(request):
+    logout(request)
+    return redirect('login')
