@@ -86,3 +86,9 @@ def updateReceipt(request, id):
     form = ReceiptForm(instance=receipt)
     context = {'form' : form}
     return render(request, 'update_receipt.html', context)
+
+def deleteReceipt(request, id):
+    username = get_user(request)
+    receipt = Receipt.objects.get(owner=username, pk=id)
+    receipt.delete()
+    return redirect('my_receipts')
