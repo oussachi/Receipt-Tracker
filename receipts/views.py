@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout, get_user
-from .forms import CreateUserForm
+from .forms import CreateUserForm, ReceiptForm
 from .models import Receipt, User
 
 # Create your views here.
@@ -59,3 +59,20 @@ def getReceipt(request, id):
     receipt = Receipt.objects.filter(owner=username, pk=id).first()
     context = {'receipt': receipt}
     return render(request, 'receipt.html', context)
+
+def addReceipt(request):
+    if request.method == 'POST':
+        form = ReceiptForm(request.POST)
+        print(request.POST)
+        if form.is_valid():
+            username = get_user(request)
+            receipt = form.save(commit=False)
+            receipt.owner = username
+            receipt.save()
+            return redirect('my_receipts')
+    
+    form = ReceiptForm()
+    context = {'form':form}
+    return render(request, 'add_receipt.html', context)
+            
+    
