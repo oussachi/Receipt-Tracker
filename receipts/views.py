@@ -63,7 +63,6 @@ def getReceipt(request, id):
 def addReceipt(request):
     if request.method == 'POST':
         form = ReceiptForm(request.POST)
-        print(request.POST)
         if form.is_valid():
             username = get_user(request)
             receipt = form.save(commit=False)
@@ -75,4 +74,15 @@ def addReceipt(request):
     context = {'form':form}
     return render(request, 'add_receipt.html', context)
             
-    
+def updateReceipt(request, id):
+    username = get_user(request) 
+    receipt = Receipt.objects.get(owner=username, pk=id)
+
+    if request.method == 'POST':
+        form = ReceiptForm(request.POST, instance=receipt)
+        if form.is_valid():
+            form.save()
+            return redirect('my_receipts')
+    form = ReceiptForm(instance=receipt)
+    context = {'form' : form}
+    return render(request, 'update_receipt.html', context)

@@ -8,5 +8,6 @@ urlpatterns = [
     path('logout/', views.logoutView, name='logout'),
     path('receipts/', views.getReceipts, name='my_receipts'),
     path('receipt/<int:id>', views.getReceipt, name='receipt'),
-    path('receipts/add', views.addReceipt, name='add_receipt')
+    path('receipts/add', views.addReceipt, name='add_receipt'),
+    path('receipt/<int:id>/update', views.updateReceipt, name='update_receipt')
 ]

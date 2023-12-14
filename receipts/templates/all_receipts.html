@@ -1,5 +1,8 @@
 <h3>My receipts</h3>
 
+<button><a href="{% url 'add_receipt' %}">Add receipt</a></button>
+<br>
+<hr>
 {% for receipt in receipts %}
 <div>
     Store : {{ receipt.store_name }}
