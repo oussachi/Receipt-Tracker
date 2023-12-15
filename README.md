@@ -12,7 +12,8 @@ The code is structured as follows (in the iwd/IWD/IWD/core folder):
 - The endpoints are at **urls.py**
 - The views are at **views.py**
 - The models are at **models.py**
-- The serializers are at **serializers.py**
+- The forms are at **forms.py**
+- The tests are at **tests.py**
 
 ## Prerequisites
 
@@ -33,7 +34,7 @@ git clone https://github.com/oussachi/Receipt-Tracker
 From the **root** directory run:
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 ```
 
 ### 3. Activate the virtual environment
@@ -62,21 +63,19 @@ pip install -r requirements.txt
 
 ### 5. Run migrations
 
-Make sure your current location looks something like **root\iwd\IWD\IWD** and run the following commands:
+Make sure your current location looks something like **root\Receipt-Tracker** and run the following commands:
 
 ```bash
-python manage.py makemigrations
+python3 manage.py makemigrations
 ```
 ```bash
-python manage.py migrate
+python3 manage.py migrate
 ```
 ### 6. Run the development server
 ```bash
-python manage.py runserver
+python3 manage.py runserver
 ```
 
 ## View the application
 
 Go to http://127.0.0.1:8000/ to view the application.
-
-## Order of endpoints
